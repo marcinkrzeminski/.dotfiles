@@ -1,0 +1,82 @@
+###############################################################################
+# DIRECTORIES
+###############################################################################
+
+alias s='cd ~/Sites'
+alias d='cd ~/Desktop'
+alias dl='cd ~/Downloads'
+alias v='cd /Volumes'
+
+# rsync
+alias rscp="rsync -avz --progress -h"
+alias rsmv="rsync -avz --progress -h --remove-source-files"
+alias rsup="rsync -avzu --progress -h"
+alias rssc="rsync -avzu --delete --progress -h"
+
+###############################################################################
+# MISC
+###############################################################################
+alias mc='mc -a'
+
+alias vh='sudo $EDITOR /usr/local/etc/httpd/'
+alias h='sudo $EDITOR /etc/hosts'
+
+alias zs='$EDITOR ~/.zshrc'
+
+alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
+
+alias wget="curl -O"
+
+alias cleanup="find . -name '*.DS_Store' -type f -ls -delete"
+
+# Empty the Trash on all mounted volumes and the main HDD
+# Also, clear Apple’s System Logs to improve shell startup speed
+alias emptytrash=" \
+    sudo rm -rfv /Volumes/*/.Trashes; \
+    rm -rfv ~/.Trash/*; \
+    sudo rm -v /private/var/vm/sleepimage; \
+    rm -rv \"/Users/paulirish/Library/Application Support/stremio/Cache\";  \
+    rm -rv \"/Users/paulirish/Library/Application Support/stremio/stremio-cache\" \
+"
+
+# Android Emulator
+alias ae='emulator  -avd Pixel_2_API_29 -netdelay none -netspeed full'
+
+# Get macOS Software Updates, and update installed Ruby gems, Homebrew, npm, and their installed packages
+alias update='sudo softwareupdate -i -a; brew update; brew upgrade; brew cleanup; npm install npm -g; npm update -g; sudo gem update --system; sudo gem update; sudo gem cleanup'
+
+###############################################################################
+# Apps
+###############################################################################
+
+alias vlc='/Applications/VLC.app/Contents/MacOS/V'
+
+###############################################################################
+# Git
+###############################################################################
+
+alias gs='git status'
+
+# Merge master into current
+alias gmc='git checkout master && git pull && git checkout - && git merge master'
+
+# Get latest changes and apply them
+alias gla='git fetch --all && git reset --hard origin/master'
+
+# Amend message for commit that's already pushed
+alias gaf='git commit --amend --no-edit && git push origin master --force'
+
+# Switch to master || main branch
+alias master="git checkout main 2>/dev/null || git checkout master"
+
+# Undo git push
+alias gup="git push -f origin HEAD^:master"
+
+###############################################################################
+# npm helpers
+###############################################################################
+
+alias yi='yarn install'
+alias yd='yarn dev'
+alias yb='yarn build'
+alias ys='yarn start'

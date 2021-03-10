@@ -1,0 +1,6 @@
+[user]
+	name = Marcin Krzemiński
+	email = marcin@krzeminski.net
+[core]
+	autocrlf = input
+	excludesfile = ~/.gitignore
