@@ -22,6 +22,8 @@ alias vh='sudo $EDITOR /usr/local/etc/httpd/'
 alias h='sudo $EDITOR /etc/hosts'
 
 alias zs='$EDITOR ~/.zshrc'
+alias dt='$EDITOR ~/.dotfiles'
+alias src='source ~/.zshrc'
 
 alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
 
@@ -45,11 +47,7 @@ alias ae='emulator  -avd Pixel_2_API_29 -netdelay none -netspeed full'
 # Get macOS Software Updates, and update installed Ruby gems, Homebrew, npm, and their installed packages
 alias update='sudo softwareupdate -i -a; brew update; brew upgrade; brew cleanup; npm install npm -g; npm update -g; sudo gem update --system; sudo gem update; sudo gem cleanup'
 
-###############################################################################
-# Apps
-###############################################################################
-
-alias vlc='/Applications/VLC.app/Contents/MacOS/V'
+alias st='speed-test'
 
 ###############################################################################
 # Git

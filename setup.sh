@@ -1,6 +1,18 @@
 # Create symlinks
 echo "Creating symlinks ..."
-for file in .{aliases,exports,functions,gitconfig,gitignore_global,hushlogin,macos,zshrc}; do
+dotfiles=(
+    .aliases
+    .antigenrc
+    .exports
+    .functions
+    .gitconfig
+    .gitignore_global
+    .hushlogin
+    .macos
+    .spaceshiprc
+    .zshrc
+)
+for file in "${dotfiles[@]}"; do
     ln -sf $HOME/.dotfiles/$file $HOME/$file
 done
 unset file
@@ -30,10 +42,7 @@ npm i -g lighthouse
 npm i -g prettier
 npm i -g trash-cli
 npm i -g generator-chisel@next
-
-# install ZSH theme
-mkdir -p $HOME/.oh-my-zsh/custom/themes/
-cp prefs/honukai.zsh-theme $HOME/.oh-my-zsh/custom/themes/
+npm install --global speed-test
 
 # Fix insecure directories for ZSH
 compaudit | xargs chmod g-w
@@ -57,15 +66,32 @@ then
     mas install 937984704 # Amphetamine
     mas install 425264550 # Disk Speed Test
     mas install 682658836 # GarageBand
-    mas install 408981434 # iMovie
     mas install 409183694 # Keynote
-    # mas install 926036361 # LastPass
     mas install 409203825 # Numbers
     mas install 409201541 # Pages
     mas install 497799835 # Xcode
 else
-	cecho "App Store login not complete. Skipping installing App Store Apps" $red
+    cecho "App Store login not complete. Skipping installing App Store Apps" $red
 fi
+
+dnsmasq for .test TLD
+https://gist.github.com/ogrrd/5831371
+echo 'address=/.test/127.0.0.1' >> $(brew --prefix)/etc/dnsmasq.conf
+sudo brew services start dnsmasq
+sudo mkdir -v /etc/resolver
+sudo bash -c 'echo "nameserver 127.0.0.1" > /etc/resolver/test'
+
+Install RDM
+wget http://avi.alkalay.net/software/RDM/RDM-2.2.dmg
+open RDM-2.2.dmg
+
+# Install wp-cli autocompletions
+cd $HOME/.dotfiles/includes
+WP_CLI_VERSION=$(sed "s/WP-CLI //" <<< $(wp --version))
+wget https://raw.githubusercontent.com/wp-cli/wp-cli/$WP_CLI_VERSION/utils/wp-completion.bash
+
+# Composer global packages
+composer global require beyondcode/expose
 
 # Run macOS setup
 source .macos

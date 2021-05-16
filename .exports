@@ -19,6 +19,7 @@ export PATH=$PATH:$ANDROID_HOME/tools/bin
 export PATH=$PATH:$ANDROID_HOME/platform-tools
 
 # nvm
-export NVM_LAZY_LOAD=true
+# export NVM_LAZY_LOAD=true
 # export NVM_AUTO_USE=true
-export NVM_COMPLETION=true
+# export NVM_COMPLETION=true
+export NVM_NO_USE=true

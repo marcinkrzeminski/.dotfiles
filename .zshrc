@@ -1,23 +1,18 @@
-# Load Antigen (`brew install antigen`)
-source /usr/local/share/antigen/antigen.zsh
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#5f6370"
 
-# Include .dotfiles
-for file in ~/.{exports,aliases,functions}; do
+# Load .dotfiles
+for file in ~/.{exports,aliases,functions,antigenrc,spaceshiprc}; do
     [ -r "$file" ] && source "$file"
 done
 unset file
 
-# Spaceship Prompt Settings
-SPACESHIP_DIR_TRUNC=0
-SPACESHIP_DIR_TRUNC_REPO=false
-SPACESHIP_PACKAGE_SHOW=false
+for file in $HOME/.dotfiles/includes/*;
+  do source $file
+done
+unset file
 
-ZSH_THEME="honukai"
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#5f6370"
-
-###############################################################################
-# ATINGEN
-###############################################################################
+# Load Antigen (`brew install antigen`)
+source /usr/local/share/antigen/antigen.zsh
 
 # Use oh-my-zsh
 antigen use oh-my-zsh
@@ -27,17 +22,18 @@ antigen bundle extract
 antigen bundle z
 antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle zsh-users/zsh-syntax-highlighting
-antigen bundle lukechilds/zsh-nvm
+# antigen bundle gretzky/n.zsh
+# antigen bundle lukechilds/zsh-nvm
 # antigen bundle Sparragus/zsh-auto-nvm-use
 # antigen bundle command-not-found
-antigen bundle wp-cli
-
-# Themes
-# antigen theme robbyrussell
+# antigen bundle wp-cli
 
 # Apply
 antigen apply
 
-# Set Spaceship ZSH as a prompt
-autoload -U promptinit; promptinit
-prompt spaceship
+autoload -U mmv
+
+# Make sure wp-cli autocompletion works
+# https://github.com/wp-cli/wp-cli/tree/v2.4.1#tab-completions
+autoload bashcompinit
+bashcompinit

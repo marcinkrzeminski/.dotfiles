@@ -5,8 +5,8 @@ function take() {
 
 function jpgoptim() {
   for file in $(find . -type f \( -name "*.jpg" -or -name "*.jpeg" -or -name "*.JPG" \)); do
-      echo found $file for optimizing...
-      jpegtran -copy none -optimize -progressive -outfile "{}.opti.jpg" $file
+      echo found "$file" for optimizing...
+      jpegtran -copy none -optimize -progressive -outfile "$file"
   done
 }
 
@@ -15,4 +15,9 @@ function pass2md5() {
   pass=$(pwgen 32 1 -sBcny)
   $(md5-cli $pass | pbcopy)
   echo $pass;
+}
+
+function ytdl() {
+  cd $HOME/Desktop/MP3
+  youtube-dl --extract-audio --audio-format mp3 "$@"
 }
