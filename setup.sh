@@ -38,11 +38,10 @@ echo "Installing npm packages ..."
 npm i -g @wordpress/env
 npm i -g spaceship-prompt
 npm i -g broken-link-checker
-npm i -g lighthouse
 npm i -g prettier
 npm i -g trash-cli
 npm i -g generator-chisel@next
-npm install --global speed-test
+npm i -g speed-test
 
 # Fix insecure directories for ZSH
 compaudit | xargs chmod g-w
@@ -64,7 +63,6 @@ read response
 if [ "$response" != "${response#[Yy]}" ]
 then
     mas install 937984704 # Amphetamine
-    mas install 425264550 # Disk Speed Test
     mas install 682658836 # GarageBand
     mas install 409183694 # Keynote
     mas install 409203825 # Numbers
@@ -74,14 +72,14 @@ else
     cecho "App Store login not complete. Skipping installing App Store Apps" $red
 fi
 
-dnsmasq for .test TLD
-https://gist.github.com/ogrrd/5831371
+# dnsmasq for .test TLD
+# https://gist.github.com/ogrrd/5831371
 echo 'address=/.test/127.0.0.1' >> $(brew --prefix)/etc/dnsmasq.conf
 sudo brew services start dnsmasq
 sudo mkdir -v /etc/resolver
 sudo bash -c 'echo "nameserver 127.0.0.1" > /etc/resolver/test'
 
-Install RDM
+# Install RDM
 wget http://avi.alkalay.net/software/RDM/RDM-2.2.dmg
 open RDM-2.2.dmg
 

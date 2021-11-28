@@ -7,11 +7,22 @@ alias d='cd ~/Desktop'
 alias dl='cd ~/Downloads'
 alias v='cd /Volumes'
 
+###############################################################################
 # rsync
+###############################################################################
+
 alias rscp="rsync -avz --progress -h"
 alias rsmv="rsync -avz --progress -h --remove-source-files"
 alias rsup="rsync -avzu --progress -h"
 alias rssc="rsync -avzu --delete --progress -h"
+
+###############################################################################
+# HTTPD
+###############################################################################
+
+alias http-start="brew services start httpd"
+alias http-restart="brew services restart httpd"
+alias http-stop="brew services stop httpd"
 
 ###############################################################################
 # MISC
@@ -45,9 +56,12 @@ alias emptytrash=" \
 alias ae='emulator  -avd Pixel_2_API_29 -netdelay none -netspeed full'
 
 # Get macOS Software Updates, and update installed Ruby gems, Homebrew, npm, and their installed packages
-alias update='sudo softwareupdate -i -a; brew update; brew upgrade; brew cleanup; npm install npm -g; npm update -g; sudo gem update --system; sudo gem update; sudo gem cleanup'
+alias update='sudo softwareupdate -i -a; brew update; brew upgrade; brew cleanup; sudo gem update --system; sudo gem update; sudo gem cleanup'
 
 alias st='speed-test'
+alias cat='bat'
+
+alias o='open .'
 
 ###############################################################################
 # Git
