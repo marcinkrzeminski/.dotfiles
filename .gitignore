@@ -1,1 +1,3 @@
 includes/wp-completion.bash
+.DS_Store
+*.dmg

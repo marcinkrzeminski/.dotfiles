@@ -1,7 +1,6 @@
 # ZSH
 autoload -U add-zsh-hook
 
-# place default node version under $HOME/.node-version
 load-nvmrc() {
   DEFAULT_NODE_VERSION=`node -v`
   if [[ -f .nvmrc && -r .nvmrc ]]; then

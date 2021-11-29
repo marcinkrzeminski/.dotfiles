@@ -28,7 +28,7 @@ fi
 
 # Install brew packages
 echo "Installing brew bundles ..."
-brew bundle
+# brew bundle
 
 # Run Brew Cleanup
 brew cleanup
@@ -46,31 +46,14 @@ npm i -g speed-test
 # Fix insecure directories for ZSH
 compaudit | xargs chmod g-w
 
-# Remove all apps from dock
+# # Remove all apps from dock
 dockutil --remove all --no-restart
 
-# Add some apps to dock
+# # Add some apps to dock
 dockutil --add /Applications/Visual\ Studio\ Code.app --no-restart
 dockutil --add /Applications/PhpStorm.app --no-restart
 dockutil --add /Applications/Brave\ Browser.app --no-restart
 dockutil --add /Applications/iTerm.app
-
-echo "Need to log in to App Store manually to install apps with mas...." $red
-echo "Opening App Store. Please login."
-open "/Applications/App \Store.app"
-echo "Is app store login complete.(y/n)? "
-read response
-if [ "$response" != "${response#[Yy]}" ]
-then
-    mas install 937984704 # Amphetamine
-    mas install 682658836 # GarageBand
-    mas install 409183694 # Keynote
-    mas install 409203825 # Numbers
-    mas install 409201541 # Pages
-    mas install 497799835 # Xcode
-else
-    cecho "App Store login not complete. Skipping installing App Store Apps" $red
-fi
 
 # dnsmasq for .test TLD
 # https://gist.github.com/ogrrd/5831371
@@ -81,7 +64,6 @@ sudo bash -c 'echo "nameserver 127.0.0.1" > /etc/resolver/test'
 
 # Install RDM
 wget http://avi.alkalay.net/software/RDM/RDM-2.2.dmg
-open RDM-2.2.dmg
 
 # Install wp-cli autocompletions
 cd $HOME/.dotfiles/includes

@@ -16,8 +16,3 @@ function pass2md5() {
   $(md5-cli $pass | pbcopy)
   echo $pass;
 }
-
-function ytdl() {
-  cd $HOME/Desktop/MP3
-  youtube-dl --extract-audio --audio-format mp3 "$@"
-}

@@ -3,6 +3,3 @@
 SPACESHIP_DIR_TRUNC=0
 SPACESHIP_DIR_TRUNC_REPO=false
 SPACESHIP_PACKAGE_SHOW=false
-
-autoload -U promptinit; promptinit
-prompt spaceship
