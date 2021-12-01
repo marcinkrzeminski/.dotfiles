@@ -22,9 +22,8 @@ antigen apply
 autoload -U mmv
 
 # Make sure wp-cli autocompletion works
-# https://github.com/wp-cli/wp-cli/tree/v2.4.1#tab-completions
-autoload bashcompinit
-bashcompinit
+autoload -U +X compinit && compinit
+autoload -U +X bashcompinit && bashcompinit
 
 # Load .dotfiles
 for file in ~/.{exports,aliases,functions,antigenrc,spaceshiprc}; do
