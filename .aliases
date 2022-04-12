@@ -22,14 +22,6 @@ alias rsup="rsync -avzu --progress -h"
 alias rssc="rsync -avzu --delete --progress -h"
 
 ###############################################################################
-# HTTPD
-###############################################################################
-
-alias http-start="brew services start httpd"
-alias http-restart="brew services restart httpd"
-alias http-stop="brew services stop httpd"
-
-###############################################################################
 # MISC
 ###############################################################################
 alias mc='mc -a'
