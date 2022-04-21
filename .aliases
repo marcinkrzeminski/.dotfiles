@@ -36,6 +36,7 @@ alias src='source ~/.zshrc'
 alias st='speed-test'
 alias cat='bat'
 alias o='open .'
+alias c='clear'
 
 alias wget="curl -O"
 
