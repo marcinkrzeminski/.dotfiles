@@ -1,3 +1,5 @@
+# Fig pre block. Keep at the top of this file.
+[[ -f "$HOME/.fig/shell/zshrc.pre.zsh" ]] && . "$HOME/.fig/shell/zshrc.pre.zsh"
 eval "$(fnm env)"
 
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#5f6370"
@@ -14,6 +16,9 @@ antigen bundle z
 antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle wp-cli
+antigen bundle npm
+antigen bundle yarn
+
 antigen theme spaceship-prompt/spaceship-prompt
 
 # Apply
@@ -35,3 +40,6 @@ for file in $HOME/.dotfiles/includes/*;
   do source $file
 done
 unset file
+
+# Fig post block. Keep at the bottom of this file.
+[[ -f "$HOME/.fig/shell/zshrc.post.zsh" ]] && . "$HOME/.fig/shell/zshrc.post.zsh"
