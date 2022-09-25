@@ -3,6 +3,7 @@
 eval "$(fnm env)"
 
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#5f6370"
+ZSH_DISABLE_COMPFIX=true
 
 # Load Antigen (`brew install antigen`)
 source /opt/homebrew/share/antigen/antigen.zsh
@@ -13,9 +14,9 @@ antigen use oh-my-zsh
 # Plugins
 antigen bundle extract
 antigen bundle z
+antigen bundle zsh-users/zsh-completions
 antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle zsh-users/zsh-syntax-highlighting
-antigen bundle wp-cli
 antigen bundle npm
 antigen bundle yarn
 
