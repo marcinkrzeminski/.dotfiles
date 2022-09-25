@@ -14,6 +14,7 @@ antigen use oh-my-zsh
 # Plugins
 antigen bundle extract
 antigen bundle z
+antigen bundle wp-cli
 antigen bundle zsh-users/zsh-completions
 antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle zsh-users/zsh-syntax-highlighting
