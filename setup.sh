@@ -57,11 +57,12 @@ cd $HOME/.dotfiles/includes
 WP_CLI_VERSION=$(sed "s/WP-CLI //" <<< $(wp --version))
 wget https://raw.githubusercontent.com/wp-cli/wp-cli/$WP_CLI_VERSION/utils/wp-completion.bash
 
-# Composer global packages
-composer global require beyondcode/expose
-
 # Run macOS setup
 source .macos
 
 # restore apps settings via mackup
 mackup restore
+
+# install Laravel Valet
+composer global require laravel/valet
+valet install
