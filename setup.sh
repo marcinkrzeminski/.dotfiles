@@ -62,3 +62,6 @@ composer global require beyondcode/expose
 
 # Run macOS setup
 source .macos
+
+# restore apps settings via mackup
+mackup restore
