@@ -35,10 +35,10 @@ brew cleanup
 
 # Install global npm packages
 echo "Installing npm packages ..."
-npm i -g broken-link-checker
-npm i -g prettier
-npm i -g trash-cli
-npm i -g generator-chisel@next
+pnpm add -g broken-link-checker
+pnpm add -g prettier
+pnpm add -g trash-cli
+pnpm add -g generator-chisel@next
 
 # Fix insecure directories for ZSH
 compaudit | xargs chmod g-w
