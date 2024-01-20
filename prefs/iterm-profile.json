@@ -159,9 +159,6 @@
         "class" : "iTermStatusBarGitComponent",
         "configuration" : {
           "knobs" : {
-            "minwidth" : 0,
-            "iTermStatusBarGitComponentPollingIntervalKey" : 2,
-            "base: compression resistance" : 1,
             "shared text color" : {
               "Red Component" : 0.90000000000000002,
               "Color Space" : "sRGB",
@@ -169,7 +166,10 @@
               "Alpha Component" : 1,
               "Green Component" : 0.63
             },
+            "iTermStatusBarGitComponentPollingIntervalKey" : 2,
             "base: priority" : 5,
+            "minwidth" : 0,
+            "base: compression resistance" : 1,
             "maxwidth" : 1.7976931348623157e+308
           },
           "layout advanced configuration dictionary value" : {
@@ -630,7 +630,7 @@
   },
   "Columns" : 131,
   "Visual Bell" : true,
-  "ASCII Ligatures" : true,
+  "Custom Directory" : "No",
   "Thin Strokes" : 4,
-  "Custom Directory" : "No"
+  "ASCII Ligatures" : true
 }

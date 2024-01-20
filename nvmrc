@@ -1,7 +1,5 @@
-# ZSH
-autoload -U add-zsh-hook
-
-load-nvmrc() {
+nvmrc-use() {
+  fnm=/Users/marcin/homebrew/bin/fnm
   DEFAULT_NODE_VERSION=`node -v`
   if [[ -f .nvmrc && -r .nvmrc ]]; then
     fnm use
@@ -11,5 +9,4 @@ load-nvmrc() {
   fi
 }
 
-add-zsh-hook chpwd load-nvmrc
-load-nvmrc
+nvmrc-use

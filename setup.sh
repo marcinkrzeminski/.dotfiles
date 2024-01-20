@@ -2,7 +2,6 @@
 echo "Creating symlinks ..."
 dotfiles=(
     .aliases
-    .antigenrc
     .exports
     .functions
     .gitconfig
@@ -11,6 +10,7 @@ dotfiles=(
     .macos
     .spaceshiprc
     .zshrc
+    .mackup.cfg
 )
 for file in "${dotfiles[@]}"; do
     ln -sf $HOME/.dotfiles/$file $HOME/$file
@@ -28,42 +28,29 @@ fi
 
 # Install brew packages
 echo "Installing brew bundles ..."
-# brew bundle
+brew bundle
 
 # Run Brew Cleanup
 brew cleanup
 
 # Install global npm packages
 echo "Installing npm packages ..."
-npm i -g @wordpress/env
-npm i -g spaceship-prompt
 npm i -g broken-link-checker
 npm i -g prettier
 npm i -g trash-cli
 npm i -g generator-chisel@next
-npm i -g speed-test
 
 # Fix insecure directories for ZSH
 compaudit | xargs chmod g-w
 
-# # Remove all apps from dock
+# Remove all apps from dock
 dockutil --remove all --no-restart
 
-# # Add some apps to dock
+# Add some apps to dock
 dockutil --add /Applications/Visual\ Studio\ Code.app --no-restart
 dockutil --add /Applications/PhpStorm.app --no-restart
-dockutil --add /Applications/Brave\ Browser.app --no-restart
+dockutil --add /Applications/Arc.app --no-restart
 dockutil --add /Applications/iTerm.app
-
-# dnsmasq for .test TLD
-# https://gist.github.com/ogrrd/5831371
-echo 'address=/.test/127.0.0.1' >> $(brew --prefix)/etc/dnsmasq.conf
-sudo brew services start dnsmasq
-sudo mkdir -v /etc/resolver
-sudo bash -c 'echo "nameserver 127.0.0.1" > /etc/resolver/test'
-
-# Install RDM
-wget http://avi.alkalay.net/software/RDM/RDM-2.2.dmg
 
 # Install wp-cli autocompletions
 cd $HOME/.dotfiles/includes

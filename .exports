@@ -3,17 +3,20 @@ export LC_ALL=en_US.UTF-8
 export LANG=en_US
 
 # Default editor
-export EDITOR="code" # `brew install vscode`
+export EDITOR="code"
 
 # Install brew casks in Applications
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
+export HOMEBREW_NO_AUTO_UPDATE=1
 
 # Don’t clear the screen after quitting a manual page
 export MANPAGER="less -X"
 
-# Android Emulator
-export ANDROID_HOME=$HOME/Library/Android/sdk
-export PATH=$PATH:$ANDROID_HOME/emulator
-export PATH=$PATH:$ANDROID_HOME/tools
-export PATH=$PATH:$ANDROID_HOME/tools/bin
-export PATH=$PATH:$ANDROID_HOME/platform-tools
+export SSH_AUTH_SOCK=~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock
+
+export PATH="$HOME/.composer/vendor/bin:$PATH"
+export PATH="$HOME/homebrew/bin:$PATH"
+export PATH="$HOME/homebrew/opt/mariadb/bin:$PATH"
+
+export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#5f6370"
+export ZSH_DISABLE_COMPFIX=true
