@@ -9,6 +9,7 @@ antigen use oh-my-zsh
 
 # Plugins
 antigen bundle extract
+antigen bundle git
 antigen bundle z
 antigen bundle wp-cli
 antigen bundle macos
@@ -25,7 +26,7 @@ antigen apply
 autoload -U +X compinit && compinit
 autoload -U +X bashcompinit && bashcompinit
 
-for file in ~/.{exports,aliases,functions,antigenrc,spaceshiprc}; do
+for file in ~/.{exports,aliases,functions,spaceshiprc}; do
     [ -r "$file" ] && source "$file"
 done
 unset file
@@ -34,15 +35,10 @@ for file in $HOME/.dotfiles/includes/*;
   do source $file
 done
 unset file
-
-# export PATH="/Users/marcin/homebrew/opt/ruby/bin:$PATH"
-
-# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-# export PATH="$PATH:$HOME/.rvm/bin"
-
-# bun completions
-[ -s "/Users/marcin/.bun/_bun" ] && source "/Users/marcin/.bun/_bun"
-
-# bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
+# pnpm
+export PNPM_HOME="/Users/marcin/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
