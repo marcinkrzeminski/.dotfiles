@@ -62,10 +62,10 @@ alias gup="git push -f origin HEAD^:master"
 # pnpm
 ###############################################################################
 
-alias pni='pnpm install'
-alias pnd='pnpm dev'
-alias pnb='pnpm build'
-alias pns='pnpm start'
+alias pri='pnpm install'
+alias prd='pnpm dev'
+alias prb='pnpm build'
+alias prs='pnpm start'
 
 ###############################################################################
 # Valet
@@ -75,7 +75,7 @@ alias vstop='valet stop && brew services stop mariadb && sudo brew services stop
 alias vstart='valet start && brew services start mariadb && brew services start dnsmasq'
 
 ###############################################################################
-# BigCommerce Stencil-CLI   
+# BigCommerce Stencil-CLI
 ###############################################################################
 
 alias sts='stencil start'
