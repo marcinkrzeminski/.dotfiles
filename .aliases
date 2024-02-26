@@ -81,3 +81,11 @@ alias vstart='valet start && brew services start mariadb && brew services start 
 alias sts='stencil start'
 alias stpu='stencil push'
 alias stpl='stencil pull'
+
+###############################################################################
+# Better ls
+###############################################################################
+
+alias l='exa -lah'
+alias ls=exa
+alias sl=exa
