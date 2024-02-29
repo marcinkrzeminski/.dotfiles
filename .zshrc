@@ -11,6 +11,7 @@ antigen use oh-my-zsh
 antigen bundle extract
 antigen bundle git
 antigen bundle z
+antigen bundle fzf
 antigen bundle wp-cli
 antigen bundle macos
 antigen bundle zsh-users/zsh-completions
