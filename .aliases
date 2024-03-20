@@ -86,9 +86,9 @@ alias stpl='stencil pull'
 # Better ls
 ###############################################################################
 
-alias l='exa -lah'
-alias ls=exa
-alias sl=exa
+alias l='eza -lah --group-directories-first --octal-permissions --icons'
+alias ls='eza --group-directories-first --icons'
+alias sl='aza --group-directories-first --icons'
 
 ###############################################################################
 # Safe rm
