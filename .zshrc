@@ -45,3 +45,4 @@ esac
 # pnpm end
 
 export PATH="/Applications/PhpStorm.app/Contents/MacOS:$PATH"
+export PATH=$PATH:~/.docker/bin
