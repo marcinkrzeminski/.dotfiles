@@ -71,8 +71,8 @@ alias prs='pnpm start'
 # Valet
 ###############################################################################
 
-alias vstop='valet stop && brew services stop mariadb && sudo brew services stop dnsmasq'
-alias vstart='valet start && brew services start mariadb && brew services start dnsmasq'
+alias vstop='valet stop && valet stop dnsmasq && brew services stop mariadb '
+alias vstart='valet start && brew services start mariadb'
 
 ###############################################################################
 # BigCommerce Stencil-CLI
