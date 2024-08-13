@@ -58,6 +58,9 @@ alias master="git checkout main 2>/dev/null || git checkout master"
 # Undo git push
 alias gup="git push -f origin HEAD^:master"
 
+# Show files that assumed-unchanged
+alias gun="git ls-files -v | grep '^[[:lower:]]'"
+
 ###############################################################################
 # pnpm
 ###############################################################################
