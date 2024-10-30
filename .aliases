@@ -69,6 +69,7 @@ alias pri='pnpm install'
 alias prd='pnpm dev'
 alias prb='pnpm build'
 alias prs='pnpm start'
+alias prt='pnpm stop-all'
 
 ###############################################################################
 # Valet
