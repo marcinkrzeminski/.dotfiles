@@ -20,3 +20,15 @@ export PATH="$HOME/homebrew/opt/mariadb/bin:$PATH"
 
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#5f6370"
 export ZSH_DISABLE_COMPFIX=true
+export ANTHROPIC_API_KEY=$(pass show aider/claude)
+
+# pnpm
+export PNPM_HOME="/Users/marcin/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+
+export PATH="/Applications/PhpStorm.app/Contents/MacOS:$PATH"
+export PATH=$PATH:~/.docker/bin

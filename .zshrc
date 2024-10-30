@@ -36,13 +36,6 @@ for file in $HOME/.dotfiles/includes/*;
   do source $file
 done
 unset file
-# pnpm
-export PNPM_HOME="/Users/marcin/Library/pnpm"
-case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
-esac
-# pnpm end
 
-export PATH="/Applications/PhpStorm.app/Contents/MacOS:$PATH"
-export PATH=$PATH:~/.docker/bin
+# Added by `rbenv init` on Tue Oct 29 22:38:39 CET 2024
+eval "$(rbenv init - --no-rehash zsh)"
