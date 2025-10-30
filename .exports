@@ -5,30 +5,18 @@ export LANG=en_US
 # Default editor
 export EDITOR="code"
 
-# Install brew casks in Applications
+# Homebrew
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 export HOMEBREW_NO_AUTO_UPDATE=1
 
-# Don’t clear the screen after quitting a manual page
+# Don't clear the screen after quitting a manual page
 export MANPAGER="less -X"
 
+# 1Password SSH agent
 export SSH_AUTH_SOCK=~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock
 
-export PATH="$HOME/.composer/vendor/bin:$PATH"
-export PATH="$HOME/homebrew/bin:$PATH"
-export PATH="$HOME/homebrew/opt/mariadb/bin:$PATH"
-
+# ZSH Autosuggestions style
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#5f6370"
-export ZSH_DISABLE_COMPFIX=true
-export ANTHROPIC_API_KEY=$(pass show aider/claude)
 
-# pnpm
-export PNPM_HOME="/Users/marcin/Library/pnpm"
-case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
-esac
-# pnpm end
-
-export PATH="/Applications/PhpStorm.app/Contents/MacOS:$PATH"
-export PATH=$PATH:~/.docker/bin
+# Note: PATH is managed in .zshrc to avoid duplicates
+# Note: PNPM_HOME and other path exports are in .zshrc

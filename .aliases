@@ -21,20 +21,14 @@ alias cat='bat'
 alias o='open .'
 alias c='clear'
 
-alias split='vsplit_tab'
-
-# Empty the Trash on all mounted volumes and the main HDD
-# Also, clear Apple’s System Logs to improve shell startup speed
-alias emptytrash=" \
- sudo rm -rfv /Volumes/_/.Trashes; \
- rm -rfv ~/.Trash/_; \
-"
-
-# Android Emulator
-alias ae='emulator -avd Pixel_2_API_29 -netdelay none -netspeed full'
-
 # Get macOS Software Updates, and update installed Ruby gems, Homebrew, npm, and their installed packages
 alias update='brew update; brew upgrade; brew cleanup; sudo gem update --system; sudo gem update; sudo gem cleanup'
+
+alias wpp='npm run cli -- wp'
+
+alias c.='cursor .'
+
+alias crawler='java --add-exports java.desktop/com.apple.eawt=ALL-UNNAMED -jar ~/apps/buu.jar'
 
 ###############################################################################
 # Git
@@ -54,6 +48,7 @@ alias gaf='git commit --amend --no-edit && git push origin master --force'
 
 # Switch to master || main branch
 alias master="git checkout main 2>/dev/null || git checkout master"
+alias main="git checkout main 2>/dev/null || git checkout master"
 
 # Undo git push
 alias gup="git push -f origin HEAD^:master"
@@ -61,15 +56,19 @@ alias gup="git push -f origin HEAD^:master"
 # Show files that assumed-unchanged
 alias gun="git ls-files -v | grep '^[[:lower:]]'"
 
+alias pull="git pull"
+
+alias push="git push origin HEAD"
+
 ###############################################################################
 # pnpm
 ###############################################################################
 
-alias pri='pnpm install'
-alias prd='pnpm dev'
-alias prb='pnpm build'
-alias prs='pnpm start'
-alias prt='pnpm stop-all'
+alias nri='pnpm install'
+alias nrd='pnpm dev'
+alias nrb='pnpm build'
+alias nrs='pnpm start'
+alias nrsa='pnpm stop-all'
 
 ###############################################################################
 # Valet
@@ -92,10 +91,19 @@ alias stpl='stencil pull'
 
 alias l='eza -lah --group-directories-first --octal-permissions --icons'
 alias ls='eza --group-directories-first --icons'
-alias sl='aza --group-directories-first --icons'
+alias sl='eza --group-directories-first --icons'
 
 ###############################################################################
 # Safe rm
 ###############################################################################
 
 alias rm=trash
+
+###############################################################################
+# Claude Code
+###############################################################################
+
+alias ccusage='bunx ccusage'
+alias cc='claude'
+alias cc-glm='claude --settings ~/.claude/settings.glm.json'
+alias oc='opencode'
