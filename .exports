@@ -3,7 +3,7 @@ export LC_ALL=en_US.UTF-8
 export LANG=en_US
 
 # Default editor
-export EDITOR="code"
+export EDITOR="zed"
 
 # Homebrew
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"

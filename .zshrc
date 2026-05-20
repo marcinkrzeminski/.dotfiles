@@ -4,42 +4,68 @@ if [[ ! -f ~/.brew_shellenv_cache ]] || [[ /opt/homebrew/bin/brew -nt ~/.brew_sh
 fi
 source ~/.brew_shellenv_cache
 
-# Performance: Enable antigen caching (must be before loading antigen)
-export ANTIGEN_CACHE=true
+# Performance settings
 export ZSH_DISABLE_COMPFIX=true
-export skip_global_compinit=1
 
-# Load Antigen
-source /opt/homebrew/share/antigen/antigen.zsh
+# Shell options
+setopt AUTO_CD              # cd by typing directory name
+setopt AUTO_PUSHD           # push directories to stack
+setopt PUSHD_IGNORE_DUPS    # no duplicates in dir stack
+setopt PUSHD_SILENT         # don't print stack after pushd/popd
 
-# Use oh-my-zsh
-antigen use oh-my-zsh
+# ============================================
+# Plugin paths
+# ============================================
+_omz="$HOME/.antigen/bundles/robbyrussell/oh-my-zsh"
+_plugins="$HOME/.antigen/bundles/zsh-users"
 
-# Plugins
-antigen bundle extract
-antigen bundle git
-antigen bundle z
-antigen bundle fzf
-antigen bundle wp-cli
-antigen bundle macos
-antigen bundle zsh-users/zsh-completions
-antigen bundle zsh-users/zsh-autosuggestions
-antigen bundle zsh-users/zsh-syntax-highlighting
-
-# Theme - skip in Warp, load Spaceship elsewhere
-if [[ $TERM_PROGRAM != "WarpTerminal" ]]; then
-  antigen theme spaceship-prompt/spaceship-prompt
+# ============================================
+# Completions (must be before plugins using compdef)
+# ============================================
+fpath=(
+    $_plugins/zsh-completions/src
+    /Users/marcin/.docker/completions
+    $fpath
+)
+# Guard: only run compinit once per session.
+# Re-sourcing .zshrc after plugins are loaded causes compdump to build a
+# huge alternation pattern (~600+ _* functions) that exceeds zsh's limit.
+if [[ -z $_zshrc_compinit_loaded ]]; then
+    autoload -Uz compinit
+    setopt EXTENDED_GLOB  # required for (N.mh+24) file-age check
+    if [[ -n ~/.zcompdump(#qN.mh+24) ]]; then
+        compinit
+    else
+        compinit -C
+    fi
+    autoload -U +X bashcompinit && bashcompinit
+    _zshrc_compinit_loaded=1
 fi
 
-# Apply
-antigen apply
+# ============================================
+# Oh-My-Zsh libs & plugins
+# ============================================
+source "$_omz/lib/directories.zsh"
+source "$_omz/lib/git.zsh"
+source "$_omz/lib/key-bindings.zsh"
+source "$_omz/lib/history.zsh"
 
-# Completions - Docker
-fpath=(/Users/marcin/.docker/completions $fpath)
-autoload -U +X bashcompinit && bashcompinit
+source "$_omz/plugins/git/git.plugin.zsh"
+source "$_omz/plugins/z/z.plugin.zsh"
+source "$_omz/plugins/extract/extract.plugin.zsh"
+[[ -f "$_omz/plugins/fzf/fzf.plugin.zsh" ]] && source "$_omz/plugins/fzf/fzf.plugin.zsh"
+
+# External plugins
+source "$_plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
+source "$_plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"  # Must be last
+
+# Spaceship prompt (skip in Warp)
+if [[ $TERM_PROGRAM != "WarpTerminal" ]]; then
+    source "$HOME/.antigen/bundles/spaceship-prompt/spaceship-prompt/spaceship.zsh"
+fi
 
 # Source dotfiles
-for file in ~/.{exports,aliases,functions,spaceshiprc}; do
+for file in ~/.{exports,functions,spaceshiprc,aliases}; do
     [ -r "$file" ] && source "$file"
 done
 unset file
@@ -52,44 +78,74 @@ unset file
 # PATH exports (all at once, avoid duplicates)
 export PNPM_HOME="/Users/marcin/Library/pnpm"
 export BUN_INSTALL="$HOME/.bun"
-export JAVA_HOME="/opt/homebrew/opt/openjdk@17"
+export JAVA_HOME="/opt/homebrew/opt/openjdk@21"
+
+# mise activate must run BEFORE PATH array build so our explicit entries win.
+# Binary path defined below; reuse same path here.
+_mise_bin="/opt/homebrew/bin/mise"
+[[ -x "$_mise_bin" ]] && eval "$($_mise_bin activate zsh)"
 
 # Build PATH once
 typeset -U path  # ensure unique entries
 path=(
     $HOME/.composer/vendor/bin
-    $HOME/homebrew/bin
-    $HOME/homebrew/opt/mariadb/bin
+    $HOME/.antigravity/antigravity/bin
+    $HOME/.opencode/bin
     $BUN_INSTALL/bin
     $PNPM_HOME
-    /Applications/PhpStorm.app/Contents/MacOS
-    ~/.docker/bin
     $HOME/.local/bin
-    /opt/homebrew/opt/openjdk@17/bin
-    /opt/homebrew/opt/ruby/bin
+    /opt/homebrew/opt/openjdk@21/bin
     /Users/marcin/.codeium/windsurf/bin
     $path
 )
 
-# Aliases
-alias pip=pip3
-alias tm='task-master'
-alias taskmaster='task-master'
+# Ensure cache directory exists (once)
+[[ -d "$HOME/.cache" ]] || mkdir -p "$HOME/.cache"
 
-# Lazy load FNM - only initialize when needed
-function node() {
-  unfunction node npm npx pnpm
-  eval "$(/opt/homebrew/bin/fnm env --use-on-cd)"
-  $0 "$@"
-}
-function npm() { node; }
-function npx() { node; }
-function pnpm() { node; }
+# Binary paths for cache invalidation (avoids subprocess calls)
+_fnm_bin="/opt/homebrew/bin/fnm"
+_atuin_bin="/opt/homebrew/bin/atuin"
+_direnv_bin="/opt/homebrew/bin/direnv"
+_mise_bin="/opt/homebrew/bin/mise"
+_scw_bin="/opt/homebrew/bin/scw"
+_rbenv_bin="/opt/homebrew/bin/rbenv"
+# Note: openclaw path is dynamic (fnm), cache manually with: rm ~/.cache/openclaw_completion.zsh
+
+# FNM - must be dynamic (creates per-session paths, cannot be cached)
+[[ -x "$_fnm_bin" ]] && eval "$($_fnm_bin env --use-on-cd)"
 
 # Warp prompt override
-if [[ $TERM_PROGRAM == "WarpTerminal" ]]; then
-  PROMPT='%F{cyan}%~%f %F{green}➜%f '
-fi
+[[ $TERM_PROGRAM == "WarpTerminal" ]] && PROMPT='%F{cyan}%~%f %F{green}➜%f '
 
 # Atuin shell history
-eval "$(atuin init zsh --disable-up-arrow)"
+_atuin_cache="$HOME/.cache/atuin_init.zsh"
+[[ -x "$_atuin_bin" && (! -f "$_atuin_cache" || "$_atuin_bin" -nt "$_atuin_cache") ]] && "$_atuin_bin" init zsh --disable-up-arrow > "$_atuin_cache" 2>/dev/null
+[[ -f "$_atuin_cache" ]] && source "$_atuin_cache"
+
+# direnv hook
+_direnv_cache="$HOME/.cache/direnv_init.zsh"
+[[ -x "$_direnv_bin" && (! -f "$_direnv_cache" || "$_direnv_bin" -nt "$_direnv_cache") ]] && "$_direnv_bin" hook zsh > "$_direnv_cache" 2>/dev/null
+[[ -f "$_direnv_cache" ]] && source "$_direnv_cache"
+
+# rbenv init (cached, regenerate: rm ~/.cache/rbenv_init.zsh)
+_rbenv_cache="$HOME/.cache/rbenv_init.zsh"
+[[ -x "$_rbenv_bin" && (! -f "$_rbenv_cache" || "$_rbenv_bin" -nt "$_rbenv_cache") ]] && "$_rbenv_bin" init - zsh > "$_rbenv_cache" 2>/dev/null
+[[ -f "$_rbenv_cache" ]] && source "$_rbenv_cache"
+
+# Scaleway CLI autocomplete
+_scw_cache="$HOME/.cache/scw_completion.zsh"
+[[ -x "$_scw_bin" && (! -f "$_scw_cache" || "$_scw_bin" -nt "$_scw_cache") ]] && "$_scw_bin" autocomplete script shell=zsh > "$_scw_cache" 2>/dev/null
+[[ -f "$_scw_cache" ]] && source "$_scw_cache"
+
+# OpenClaw Completion (regenerate: rm ~/.cache/openclaw_completion.zsh)
+_openclaw_cache="$HOME/.cache/openclaw_completion.zsh"
+if [[ ! -f "$_openclaw_cache" ]]; then
+  openclaw completion --shell zsh > "$_openclaw_cache" 2>/dev/null
+fi
+[[ -f "$_openclaw_cache" ]] && source "$_openclaw_cache"
+
+# Pi coding agent update alias
+alias pi-update="npm install -g @earendil-works/pi-coding-agent"
+
+# bun completions
+[ -s "/Users/marcin/.bun/_bun" ] && source "/Users/marcin/.bun/_bun"

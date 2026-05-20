@@ -20,13 +20,13 @@ alias src='source ~/.zshrc'
 alias cat='bat'
 alias o='open .'
 alias c='clear'
+alias c.='code .'
+alias z.='zed .'
+
+alias pip=pip3
 
 # Get macOS Software Updates, and update installed Ruby gems, Homebrew, npm, and their installed packages
 alias update='brew update; brew upgrade; brew cleanup; sudo gem update --system; sudo gem update; sudo gem cleanup'
-
-alias wpp='npm run cli -- wp'
-
-alias c.='cursor .'
 
 alias crawler='java --add-exports java.desktop/com.apple.eawt=ALL-UNNAMED -jar ~/apps/buu.jar'
 
@@ -61,7 +61,7 @@ alias pull="git pull"
 alias push="git push origin HEAD"
 
 ###############################################################################
-# pnpm
+# package managers
 ###############################################################################
 
 alias nri='pnpm install'
@@ -69,6 +69,8 @@ alias nrd='pnpm dev'
 alias nrb='pnpm build'
 alias nrs='pnpm start'
 alias nrsa='pnpm stop-all'
+alias nrcd='npm run clean-dev'
+alias nrcb='npm run clean-build'
 
 ###############################################################################
 # Valet
@@ -76,14 +78,6 @@ alias nrsa='pnpm stop-all'
 
 alias vstop='valet stop && valet stop dnsmasq && brew services stop mariadb '
 alias vstart='valet start && brew services start mariadb'
-
-###############################################################################
-# BigCommerce Stencil-CLI
-###############################################################################
-
-alias sts='stencil start'
-alias stpu='stencil push'
-alias stpl='stencil pull'
 
 ###############################################################################
 # Better ls
@@ -100,10 +94,13 @@ alias sl='eza --group-directories-first --icons'
 alias rm=trash
 
 ###############################################################################
-# Claude Code
+# Claude Code & Friends
 ###############################################################################
 
 alias ccusage='bunx ccusage'
 alias cc='claude'
-alias cc-glm='claude --settings ~/.claude/settings.glm.json'
+alias ccc='claude --continue'
+alias colo='claude --dangerously-skip-permissions'
+alias golo='claude --dangerously-skip-permissions --settings ~/.claude/settings.glm.json --model glm-5.1'
+alias glm='claude --settings ~/.claude/settings.glm.json --model glm-5.1'
 alias oc='opencode'

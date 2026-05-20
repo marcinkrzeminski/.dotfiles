@@ -5,3 +5,5 @@
 	autocrlf = input
 	excludesfile = ~/.gitignore
 	filemode = false
+[coderabbit]
+	machineId = cli/636380a56f55488da32805e100ca1ffc

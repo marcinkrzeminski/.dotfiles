@@ -2,3 +2,33 @@
 function take() {
     mkdir -p "$@" && cd "$@"
 }
+
+# Jump to project's code directory (or project root if no code/ exists)
+function p() {
+    local base="$HOME/Projects"
+    if [[ -z "$1" ]]; then
+        cd "$base"
+    elif [[ -d "$base/$1/code" ]]; then
+        cd "$base/$1/code"
+    elif [[ -d "$base/$1" ]]; then
+        cd "$base/$1"
+    else
+        echo "Project '$1' not found"
+        return 1
+    fi
+}
+
+# Wrapper funkcja zostaje bez zmian
+claude() {
+  local cwd="$PWD"
+
+  if [[ "$cwd" == *"/Users/marcin/Projects/caraway"* ]]; then
+    CLAUDE_CONFIG_DIR=~/.claude-caraway command claude "$@"
+  else
+    CLAUDE_CONFIG_DIR=~/.claude command claude "$@"
+  fi
+}
+
+rano() {
+    claude --name "$(date +"%d/%m/%Y")"
+}
